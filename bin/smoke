@@ -1,8 +1,14 @@
 #!/bin/sh
 set -eu
 
-if [ -x ./peekaboo ]; then
-  ./peekaboo --version
-else
-  swift run --package-path Apps/CLI peekaboo --version
+bin_path="${PEEKABOO_INSTALL_PATH:-$HOME/.local/bin/peekaboo}"
+
+if [ ! -x "$bin_path" ]; then
+  echo "smoke failed: $bin_path is not executable" >&2
+  exit 1
 fi
+
+"$bin_path" --version | /usr/bin/grep -Fq '0xble'
+"$bin_path" --help >/dev/null
+
+echo "smoke ok: peekaboo"

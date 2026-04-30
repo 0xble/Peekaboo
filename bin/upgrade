@@ -1,8 +1,22 @@
 #!/bin/sh
 set -eu
 
-script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-project_root=$(CDPATH= cd -- "$script_dir/.." && pwd)
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+bin_path="${PEEKABOO_INSTALL_PATH:-$HOME/.local/bin/peekaboo}"
+build_path="$repo_root/Apps/CLI/.build/release/peekaboo"
 
-echo "manual: build via Xcode"
-echo "open $project_root/Apps/Peekaboo.xcworkspace and archive"
+cd "$repo_root/Apps/CLI"
+swift build --configuration release
+
+mkdir -p "$(dirname -- "$bin_path")"
+if [ -L "$bin_path" ]; then
+  if command -v trash >/dev/null 2>&1; then
+    trash "$bin_path"
+  else
+    /bin/rm -f "$bin_path"
+  fi
+fi
+install -m 755 "$build_path" "$bin_path"
+
+echo "Installed $bin_path"
+"$bin_path" --version
