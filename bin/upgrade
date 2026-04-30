@@ -1,3 +1,8 @@
 #!/bin/sh
+set -eu
+
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+project_root=$(CDPATH= cd -- "$script_dir/.." && pwd)
+
 echo "manual: build via Xcode"
-echo "open ~/Repos/Peekaboo/Apps/Peekaboo.xcworkspace and archive"
+echo "open $project_root/Apps/Peekaboo.xcworkspace and archive"
