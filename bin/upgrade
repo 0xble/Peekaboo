@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "manual: build via Xcode"
+echo "open ~/Repos/Peekaboo/Apps/Peekaboo.xcworkspace and archive"

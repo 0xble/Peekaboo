@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+if [ -x ./peekaboo ]; then
+  ./peekaboo --version
+else
+  swift run --package-path Apps/CLI peekaboo --version
+fi
