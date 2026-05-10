@@ -6,7 +6,7 @@ Track intentional fork drift for the default fork layout.
 
 - `main` is based on `upstream/main`.
 - The fork carries only Brian's fork metadata and local install wiring:
-  - version suffix `3.0.0-beta4-0xble.0.1.0`
+  - version suffix `3.1.0-0xble.0.1.0`
   - `bin/upgrade`
   - `bin/smoke`
 
